@@ -1,92 +1,111 @@
 import os
-import webbrowser
 
 # ==========================================
 # POSTER CONTENT CONFIGURATION
-# Edit the values below to update the poster text
+# Focus: Methodology, Team Organization, Progress
 # ==========================================
 
 POSTER_DATA = {
     "title": "EMPREINTES ÉCOLOGIQUES D'UNE ORGANISATION",
-    "subtitle": "SAÉ : Analyse de l'Organisation & Empreinte Numérique",
+    "subtitle": "SAÉ : Analyse Méthodologique & Organisationnelle",
     "subject_company": "ANTHROPIC",
     "group_members": [
-        "Membre 1",
-        "Membre 2",
-        "Membre 3",
-        "Membre 4",
-        "Membre 5"
+        "Membre 1", "Membre 2", "Membre 3", "Membre 4", "Membre 5"
     ],
     
-    # Section 1: History
-    "history_title": "1. Histoire",
-    "history_content": """
-    <p><strong>Fondation :</strong> Créée en 2021 par Dario et Daniela Amodei (anciens d'OpenAI).</p>
-    <p><strong>Mission :</strong> Développer une IA sûre, fiable et interprétable. "Constitutionnal AI".</p>
-    <p><strong>Jalons clés :</strong></p>
-    <ul>
-        <li>2021 : Levée de fonds série A ($124M).</li>
-        <li>2023 : Lancement de Claude et Claude 2.</li>
-        <li>Partenariats majeurs avec Google et Amazon.</li>
-    </ul>
+    # COLUMN 2 (Now 1): METHODOLOGY (THE CORE)
+    "method_title": "MÉTHODOLOGIE : DIVISER POUR MIEUX RÉGNER",
+    "method_content": """
+    <div class="mindmap-container">
+        
+        <!-- STEP 1: TEAM -->
+        <div class="mind-node theme-red">
+            <div class="node-header">
+                <span class="node-icon">👥</span>
+                <h4>1. ORGANISATION</h4>
+            </div>
+            <div class="node-body">
+                <p>Création d'une <strong>équipe de 5 experts</strong>.</p>
+                <p>Chacun se voit attribuer un axe d'analyse spécifique (Histoire, PESTEL, etc.).</p>
+            </div>
+        </div>
+
+        <!-- STEP 2: PARALLEL WORK -->
+        <div class="mind-node theme-green">
+            <div class="node-header">
+                <span class="node-icon">⚡</span>
+                <h4>2. PARALLÉLISME</h4>
+            </div>
+            <div class="node-body">
+                <p>Recherche documentaire <strong>simultanée</strong>.</p>
+                <p>Gain de temps x5 par rapport au travail séquentiel.</p>
+            </div>
+        </div>
+
+        <!-- STEP 3: TOOLS -->
+        <div class="mind-node theme-blue">
+            <div class="node-header">
+                <span class="node-icon">🛠️</span>
+                <h4>3. OUTILS</h4>
+            </div>
+            <div class="node-body">
+                <div class="mini-tool trello-tag"><strong>TRELLO</strong> : Kanban (To Do/Doing/Done)</div>
+                <div class="mini-tool discord-tag"><strong>DISCORD</strong> : Brainstorming Live</div>
+            </div>
+        </div>
+
+        <!-- STEP 4: SYNTHESIS -->
+        <div class="mind-node theme-yellow">
+            <div class="node-header">
+                <span class="node-icon">🎓</span>
+                <h4>4. MUTUALISATION</h4>
+            </div>
+            <div class="node-body">
+                <p><strong>Enseignement par les pairs</strong>.</p>
+                <p>Chaque expert forme le reste de l'équipe sur ses découvertes avant le jour J.</p>
+            </div>
+        </div>
+
+    </div>
     """,
 
-    # Section 2: Macro-Environment
-    "macro_title": "2. Macro-Environnement (PESTEL)",
-    "macro_content": """
-    <ul>
-        <li><strong>Politique :</strong> Régulations IA (EU AI Act, décrets US).</li>
-        <li><strong>Économique :</strong> Marché de l'IA générative en explosion. Investissements massifs.</li>
-        <li><strong>Social :</strong> Crainte de l'IA, impact sur l'emploi, demande d'éthique.</li>
-        <li><strong>Technologique :</strong> Course à la puissance (LLM), innovation rapide.</li>
-        <li><strong>Écologique :</strong> Consommation énergétique des Data Centers.</li>
-        <li><strong>Légal :</strong> Propriété intellectuelle, droits d'auteur, sécurité des données.</li>
-    </ul>
-    """,
-
-    # Section 3: Internal Analysis
-    "internal_title": "3. Analyse Interne",
-    "internal_content": """
-    <p><strong>Forces :</strong> Recherche de pointe en sécurité (Alignment),Talents ex-OpenAI, Culture de la sécurité.</p>
-    <p><strong>Faiblesses :</strong> Moins de visibilité grand public que ChatGPT, dépendance aux financements externes.</p>
-    <p><strong>Ressources :</strong> Partenariats cloud (AWS/GCP), capital humain très qualifié.</p>
-    """,
-
-    # Section 4: External Analysis
-    "external_title": "4. Analyse Externe",
-    "external_content": """
-    <p><strong>Opportunités :</strong> Marché B2B, intégration dans des outils tiers, demande pour une IA "éthique".</p>
-    <p><strong>Menaces :</strong> Concurrence féroce (OpenAI, Google DeepMind, Meta), régulations strictes, coûts de compute.</p>
-    <p><strong>Analyse concurrentielle :</strong> Positionnement "Safety First" vs "Move Fast".</p>
-    """,
-
-    # Section 5: Strategy & Structure
-    "strategy_title": "5. Finalités & Stratégie",
-    "strategy_content": """
-    <p><strong>Structure :</strong> Public Benefit Corporation (PBC). Structure hybride visant le profit mais avec une mission sociale contraignante.</p>
-    <p><strong>Stratégie :</strong> "Safety-focused scaling". Ne pas être les premiers à tout prix, mais être les plus sûrs.</p>
-    <p><strong>Métiers :</strong> Chercheurs en ML, Ingénieurs sécurité, Policy experts.</p>
-    """,
-
-    # Ecological Focus (SAÉ Requirement)
-    "eco_title": "Empreinte Numérique & Solution",
-    "eco_content": """
-    <p><strong>Le Problème :</strong> L'entraînement des LLM consomme des GWh d'électricité et des milliers de litres d'eau (refroidissement).</p>
-    <p><strong>Démarche Anthropic :</strong></p>
-    <ul>
-        <li>Utilisation de serveurs cloud optimisés (AWS Trainium/Inferentia).</li>
-        <li>Recherche sur l'efficacité des modèles ("Smaller models").</li>
-        <li>Engagement de transparence (Constitutionnal AI).</li>
-    </ul>
-    <p><strong>Notre Analyse :</strong> Impact carbone vs Bénéfice social de l'IA.</p>
+    # COLUMN 3 (Now 2): PROGRESS & FINDINGS
+    "progress_title": "DÉCOUVERTES CLÉS (EN COURS)",
+    "progress_content": """
+    <div class="findings-grid">
+        <div class="finding-card">
+            <h4>📜 Histoire</h4>
+            <p>Fondée en 2021 par des anciens d'OpenAI (Amodei). Focus Sécurité > Vitesse.</p>
+        </div>
+        <div class="finding-card">
+            <h4>🌍 Macro-Env</h4>
+            <p>Secteur en explosion mais sous pression régulatoire (EU AI Act) et énergétique.</p>
+        </div>
+        <div class="finding-card">
+            <h4>🏢 Interne</h4>
+            <p>Structure PBC (Public Benefit Corp). Culture "Safety-First".</p>
+        </div>
+        <div class="finding-card">
+            <h4>🌱 Écologie</h4>
+            <p>Enjeu majeur : Cosommation énergétique de l'entraînement des modèles. Anthropic vise l'efficience.</p>
+        </div>
+        <div class="finding-card">
+            <h4>🔮 Stratégie</h4>
+            <p>"Constitutional AI" : Aligner l'IA avec des principes humains dès l'entraînement.</p>
+        </div>
+    </div>
+    <div class="highlight-final">
+        <h3>🚀 Prochaines Étapes</h3>
+        <p>Finalisation de l'analyse SWOT croisée et préparation du diaporama final.</p>
+    </div>
     """
 }
 
 # Pre-calculate group members HTML to avoid formatting issues in the template
-POSTER_DATA["group_members_html"] = ' '.join([f'<span>{m}</span> • ' for m in POSTER_DATA["group_members"]])[:-3]
+POSTER_DATA["group_members_html"] = ' &nbsp;•&nbsp; '.join([f'<span>{m}</span>' for m in POSTER_DATA["group_members"]])
 
 # ==========================================
-# HTML TEMPLATE
+# A3 LANDSCAPE HTML TEMPLATE
 # ==========================================
 
 HTML_TEMPLATE = """
@@ -94,278 +113,272 @@ HTML_TEMPLATE = """
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poster - {subject_company}</title>
+    <title>Poster A3 Methodology - {subject_company}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {{
-            --bg-color: #0f1014;
-            --card-bg: rgba(30, 32, 40, 0.7);
-            --accent-color: #d4a373; /* Anthropic-ish warm tone */
-            --accent-secondary: #a98467;
-            --text-main: #f0f0f0;
-            --text-muted: #b0b0b0;
-            --border-highlight: rgba(212, 163, 115, 0.3);
-            --gradient-1: linear-gradient(135deg, #2b2d42 0%, #1a1b23 100%);
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --accent: #D97757; /* Anthropic Clay/Orange */
+            --accent-light: #F2C1A2;
+            --text-white: #ffffff;
+            --text-gray: #bbbbbb;
+            
+            /* MIND MAP COLORS (Inspired by Forms Of Energy image) */
+            --theme-red-bg: #EAC4C4; --theme-red-border: #D68F8F; --theme-red-text: #8B4444;
+            --theme-green-bg: #CBEAC4; --theme-green-border: #9FD68F; --theme-green-text: #4E8B44; 
+            --theme-blue-bg: #C4DCEA; --theme-blue-border: #8FBAD6; --theme-blue-text: #446C8B;
+            --theme-yellow-bg: #EAE4C4; --theme-yellow-border: #D6C88F; --theme-yellow-text: #8B7D44;
         }}
 
-        * {{
-            box-sizing: border-box;
+        /* RESET & PAGE SETUP */
+        * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+        
+        @page {{
+            size: A3 landscape; /* 420mm x 297mm */
             margin: 0;
-            padding: 0;
         }}
 
         body {{
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Outfit', sans-serif;
-            padding: 2rem;
-            min-height: 100vh;
-            /* Subtle background pattern */
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(212, 163, 115, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(100, 100, 200, 0.05) 0%, transparent 20%);
-        }}
-
-        /* A4/Poster Container wrapper for screen viewing */
-        .poster-container {{
-            max-width: 1400px; /* Large format */
-            margin: 0 auto;
-            background: var(--gradient-1);
-            border: 1px solid #333;
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-gap: 2rem;
-            position: relative;
-            overflow: hidden;
-        }}
-
-        /* Header spans full width */
-        header {{
-            grid-column: 1 / -1;
-            text-align: center;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 1.5rem;
-        }}
-
-        h1 {{
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-            letter-spacing: -1px;
-            text-transform: uppercase;
-        }}
-
-        .subtitle {{
-            font-size: 1.5rem;
-            color: var(--text-muted);
-            font-weight: 300;
-            margin-bottom: 1rem;
-        }}
-
-        .group-members {{
+            width: 420mm;
+            height: 297mm;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Strict sizing */
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            font-size: 1.1rem;
-            color: var(--text-main);
+            align-items: center;
+        }}
+
+        /* MAIN LAYOUT CANVAS */
+        .poster-canvas {{
+            width: 410mm;
+            height: 287mm; /* 5mm padding sim */
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            display: grid;
+            grid-template-rows: auto 1fr;
+            gap: 15px;
+            padding: 20px;
+            border: 2px solid #333;
+        }}
+
+        /* HEADER */
+        header {{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--accent);
+        }}
+
+        .header-left h1 {{
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            line-height: 1;
+        }}
+        .header-left h2 {{
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            font-weight: 400;
+            margin-top: 5px;
+        }}
+
+        .header-right {{
+            text-align: right;
+        }}
+        .members {{
             background: rgba(255,255,255,0.05);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            display: inline-flex;
-            border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--accent-light);
         }}
 
-        /* Layout Grid Areas */
-        /* Left Column: History & Macro */
-        .col-left {{
-            grid-column: span 4;
+        /* 2-COLUMN CONTENT */
+        .content-grid {{
+            display: grid;
+            grid-template-columns: 1.3fr 1fr; /* Methodology gets slightly more space */
+            gap: 40px;
+            height: 100%;
+            padding: 0 20px; 
+        }}
+
+        /* COLUMN STYLES */
+        .col {{
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 20px;
         }}
 
-        /* Center Column: Ecological Focus (Centerpiece) & Strategy */
-        .col-center {{
-            grid-column: span 4;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+        h3 {{
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent);
+            padding-left: 10px;
         }}
 
-        /* Right Column: Internal & External */
-        .col-right {{
-            grid-column: span 4;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }}
-
-        /* Cards Styling */
         .card {{
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-highlight);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            height: 100%;
+        }}
+
+        /* =========================================
+           MIND MAP STYLES (THEME BOXES)
+           ========================================= */
+        .mindmap-container {{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 25px;
+            height: 90%;
             position: relative;
         }}
 
-        .card:hover {{
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border-color: var(--accent-color);
-        }}
-
-        .card h2 {{
-            font-family: 'Playfair Display', serif;
-            color: var(--accent-color);
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 0.5rem;
-        }}
-
-        .card-content {{
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #ddd;
-        }}
-
-        .card-content ul {{
-            padding-left: 1.2rem;
-            margin-bottom: 0.5rem;
+        .mind-node {{
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border: 3px solid transparent;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            position: relative;
         }}
         
-        .card-content li {{
-            margin-bottom: 0.5rem;
+        .mind-node:hover {{ transform: scale(1.02); }}
+
+        /* Themes */
+        .theme-red {{ background-color: var(--theme-red-bg); border-color: var(--theme-red-border); color: var(--theme-red-text); }}
+        .theme-green {{ background-color: var(--theme-green-bg); border-color: var(--theme-green-border); color: var(--theme-green-text); }}
+        .theme-blue {{ background-color: var(--theme-blue-bg); border-color: var(--theme-blue-border); color: var(--theme-blue-text); }}
+        .theme-yellow {{ background-color: var(--theme-yellow-bg); border-color: var(--theme-yellow-border); color: var(--theme-yellow-text); }}
+
+        .node-header {{
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+            padding-bottom: 10px;
+        }}
+        
+        .node-icon {{ font-size: 2.5rem; margin-right: 15px; }}
+        .mind-node h4 {{ margin: 0; font-size: 1.4rem; text-transform: uppercase; font-family: 'Space Grotesk', sans-serif; font-weight: 700; }}
+        
+        .node-body p {{ font-size: 1rem; margin-bottom: 5px; font-weight: 500; opacity: 0.9; }}
+        .node-body strong {{ font-weight: 800; }}
+
+        /* Mini Tools Tags */
+        .mini-tool {{
+            display: inline-block; padding: 5px 10px; border-radius: 8px; margin-top: 5px; font-weight: bold; font-size: 0.9rem; width: 100%; margin-bottom: 5px;
+        }}
+        .trello-tag {{ background: rgba(255,255,255,0.6); color: #0079BF; }}
+        .discord-tag {{ background: rgba(255,255,255,0.6); color: #5865F2; }}
+
+        /* Connectors (CSS Arrows between grid items) */
+        /* Arrow 1->2 */
+        .theme-red::after {{
+            content: "➔"; font-size: 2rem; position: absolute; right: -25px; top: 45%; color: var(--text-gray); opacity: 0.5;
+        }}
+        /* Arrow 2->4 (Diagonal/Down) */
+        .theme-green::after {{
+             content: "⤵"; font-size: 2rem; position: absolute; bottom: -30px; left: 45%; color: var(--text-gray); opacity: 0.5;
+        }}
+         /* Arrow 3->4 */
+        .theme-blue::after {{
+             content: "➔"; font-size: 2rem; position: absolute; right: -25px; top: 45%; color: var(--text-gray); opacity: 0.5;
         }}
 
-        .card-content strong {{
-            color: #fff;
+
+        /* Findings Styles */
+        .findings-grid {{ display: grid; grid-template-columns: 1fr; gap: 15px; }}
+        .finding-card {{ background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; border-left: 3px solid var(--accent); }}
+        .finding-card h4 {{ color: var(--accent-light); margin-bottom: 5px; font-size: 1.1rem; }}
+        .finding-card p {{ font-size: 0.9rem; line-height: 1.4; color: #ccc; }}
+
+        .highlight-final {{
+            background: linear-gradient(90deg, rgba(217, 119, 87, 0.2), transparent);
+            padding: 15px; border-radius: 8px; border: 1px solid var(--accent); margin-top: 10px;
         }}
 
-        /* Specific Highlights */
-        .eco-card {{
-            background: rgba(46, 139, 87, 0.1); /* Subtle green tint */
-            border-color: rgba(46, 139, 87, 0.4);
-        }}
-        .eco-card h2 {{
-            color: #66c2a5;
-        }}
-
-        .intro-card {{
-            text-align: center;
-            font-style: italic;
-            background: transparent;
-            border: none;
-            box-shadow: none;
-        }}
-
-        /* Print Validations */
+        /* PRINT FIX */
         @media print {{
             body {{
                 background: white;
                 color: black;
-                padding: 0;
+                width: 100%; height: 100%;
             }}
-            .poster-container {{
-                box-shadow: none;
-                border: none;
-                width: 100%;
-                max-width: none;
+            .poster-canvas {{
                 background: white;
+                color: black;
+                border: none;
+                width: 100%; height: 100%;
+                padding: 0;
             }}
             .card {{
                 background: white;
-                border: 2px solid #333;
-                color: black;
-                page-break-inside: avoid;
+                border: none; 
+                box-shadow: none;
             }}
-            h1, h2, .subtitle, strong {{
-                color: black !important;
-            }}
-            .card-content {{
-                color: black;
-            }}
+            /* Force colors in print */
+            .theme-red {{ background-color: #EAC4C4 !important; border-color: #D68F8F !important; color: #8B4444 !important; -webkit-print-color-adjust: exact; }}
+            .theme-green {{ background-color: #CBEAC4 !important; border-color: #9FD68F !important; color: #4E8B44 !important; -webkit-print-color-adjust: exact; }}
+            .theme-blue {{ background-color: #C4DCEA !important; border-color: #8FBAD6 !important; color: #446C8B !important; -webkit-print-color-adjust: exact; }}
+            .theme-yellow {{ background-color: #EAE4C4 !important; border-color: #D6C88F !important; color: #8B7D44 !important; -webkit-print-color-adjust: exact; }}
+            
+            h3, .header-left h1 {{ color: black !important; }}
+            .finding-card h4 {{ color: #D97757 !important; font-weight: bold; }}
+            .finding-card, .highlight-final {{ border: 1px solid #ccc; color: black; }}
+            .members {{ color: black; border: 1px solid #ccc; }}
         }}
+
     </style>
 </head>
 <body>
 
-    <div class="poster-container">
+    <div class="poster-canvas">
         <header>
-            <h1>{subject_company}</h1>
-            <div class="subtitle">{title} <br> {subtitle}</div>
-            <div class="group-members">
-                {group_members_html}
+            <div class="header-left">
+                <h1>{subject_company}</h1>
+                <h2>{subtitle}</h2>
+            </div>
+            <div class="header-right">
+                <div class="members">
+                    {group_members_html}
+                </div>
             </div>
         </header>
 
-        <!-- LEFT COLUMN -->
-        <div class="col-left">
-            <div class="card">
-                <h2>{history_title}</h2>
-                <div class="card-content">
-                    {history_content}
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>{macro_title}</h2>
-                <div class="card-content">
-                    {macro_content}
-                </div>
-            </div>
-        </div>
-
-        <!-- CENTER COLUMN -->
-        <div class="col-center">
-            <div class="card eco-card">
-                <h2>🌿 {eco_title}</h2>
-                <div class="card-content">
-                    {eco_content}
-                </div>
-            </div>
-             <div class="card intro-card">
-                <div class="card-content" style="font-size: 1.2rem; border-top: 1px solid #444; border-bottom: 1px solid #444; padding: 1rem;">
-                    "Une IA utile, honnête et inoffensive."
-                </div>
-            </div>
+        <div class="content-grid">
             
-             <div class="card">
-                <h2>{strategy_title}</h2>
-                <div class="card-content">
-                    {strategy_content}
+            <!-- LEFT: METHODOLOGY (MIND MAP VISUAL) -->
+            <div class="col">
+                <div class="card">
+                    <h2>{method_title}</h2>
+                    {method_content}
                 </div>
             </div>
+
+            <!-- RIGHT: PROGRESS -->
+            <div class="col">
+                <div class="card">
+                    <h3>{progress_title}</h3>
+                    {progress_content}
+                </div>
+            </div>
+
         </div>
-
-        <!-- RIGHT COLUMN -->
-        <div class="col-right">
-             <div class="card">
-                <h2>{internal_title}</h2>
-                <div class="card-content">
-                    {internal_content}
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>{external_title}</h2>
-                <div class="card-content">
-                    {external_content}
-                </div>
-            </div>
-        </div>
-
     </div>
 
 </body>
@@ -383,7 +396,7 @@ def generate_poster():
         f.write(html_content)
     
     print(f"✅ Poster généré avec succès : {os.path.abspath(output_filename)}")
-    print("Ouvrez ce fichier dans votre navigateur pour voir le résultat et l'imprimer en PDF.")
+    print("ℹ️  Instructions pour PDF : Ouvrez Chrome -> Imprimer (Ctrl+P) -> Destination: 'Save as PDF' -> Paper Size: 'A3' -> Layout: 'Landscape' -> Scale: 'Default' or 'Fit to printable area'")
 
 if __name__ == "__main__":
     generate_poster()
