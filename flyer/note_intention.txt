@@ -26,7 +26,7 @@ Notre démarche a suivi un processus itératif "work smarter, not harder" :
 squelette du flyer via des croquis sur papier pour gagner du temps lors de l'intégration.
 - Socle Académique : Nous avons mobilisé les bases de structure et de syntaxe HTML/CSS apprises lors des 
 cours de M. Thon. Ce socle nous a permis de garder le contrôle sur la sémantique et l'organisation du code.
-- "Vibecoding" avec AntiGravity : Pour accélérer la production, nous avons utilisé l'outil AntiGravity via 
+- "Prompt Engineering" avec AntiGravity : Pour accélérer la production, nous avons utilisé l'outil AntiGravity via 
 des prompts précis. Cela nous a permis de nous concentrer sur la logique, la technique et l'affinage du design 
 plutôt que sur la rédaction répétitive de lignes de code. Cette approche nous a permis d'être beaucoup plus efficaces.
 
@@ -36,27 +36,26 @@ Notre organisation a été très collaborative. Après avoir validé ensemble la
 nous avons décidé de nous répartir le développement HTML/CSS en divisant le flyer en trois segments logiques. 
 Chaque membre a pris en charge l'intégration d'une partie avant de tout mettre en commun :
 
-- Membre 1 : S'est focalisé sur la partie supérieure (Header et Hero Section). Il a notamment travaillé sur 
+- Aminata Sita CAMARA : S'est focalisé sur la partie supérieure (Header et Hero Section). Il a notamment travaillé sur 
 la mise en place du bandeau visuel et l'attraction de l'œil.
 
-- Membre 2 : A géré le "cœur" du flyer, incluant la barre de statistiques et la grille des compétences. 
+- Mamadou Bailo BARRY : A géré le "cœur" du flyer, incluant la barre de statistiques et la grille des compétences. 
 Il a également veillé à la rédaction et à la synthèse des textes pour ces sections.
 
-- Membre 3 : A pris en charge la partie basse et latérale (Section S.A.E, Sidebar et Footer). 
+- Aldo Alex NGANJI : A pris en charge la partie basse et latérale (Section S.A.E, Sidebar et Footer). 
 Il a notamment intégré les nouveaux éléments de mentorat et le QR Code final.
 
 Enfin, nous avons terminé le projet ensemble pour harmoniser le CSS global et résoudre les problèmes d'impression.
 
 4. Difficultés Rencontrées
 
-La principale difficulté a été technique : la transition entre l'affichage web et l'exportation PDF. 
+La principale difficulté a été technique : la transition entre l'affichage web et l'exportation(impression) PDF. 
 Au départ, l'impression sur navigateur générait systématiquement deux pages et les couleurs de fond disparaissaient, 
-rendant le flyer terne et illisible une fois imprimé.
+rendant le flyer déformé une fois imprimé.
 
 Nous avons dû effectuer un travail important sur les styles d'impression afin de :
 - Forcer la préservation des couleurs.
 - Verrouiller les dimensions au format A4 exact pour éviter les débordements de page.
-- Résoudre des erreurs de syntaxe CSS qui bloquaient certains sélecteurs au début du projet.
 
 Conclusion
 Grâce à notre collaboration, nous avons réussi à produire un flyer qui ne se contente pas d'être beau à l'écran, 
